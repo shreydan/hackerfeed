@@ -15,8 +15,6 @@ const FeedList = () => {
 
 	const theme = useTheme();
 
-	const FEED_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
-
 	async function getData() {
 		const ids = await (
 			await fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
