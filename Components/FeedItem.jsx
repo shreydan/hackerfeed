@@ -2,33 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTheme, Text, Card, Badge } from "react-native-paper";
 import { StyleSheet } from "react-native";
 
-const FeedItem = ({ postID }) => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-	const [response, setResponse] = useState({});
-
+const FeedItem = ({ item }) => {
 	const theme = useTheme();
-
-	const POST_URL = `https://hacker-news.firebaseio.com/v0/item/${postID}.json`;
-
-	useEffect(() => {
-		fetch(POST_URL)
-			.then((res) => res.json())
-			.then((result) => {
-				setIsLoading(false);
-				setIsError(false);
-				setResponse(result);
-				console.log(result);
-			})
-			.catch((error) => {
-				setIsLoading(false);
-				setIsError(true);
-			});
-	}, []);
-
-	if (isError) {
-		return null;
-	}
 
 	return (
 		<Card
@@ -42,7 +17,7 @@ const FeedItem = ({ postID }) => {
 					]}
 					size={25}
 				>
-					{response.score}
+					{item.score}
 				</Badge>
 				<Badge
 					style={[
@@ -51,17 +26,17 @@ const FeedItem = ({ postID }) => {
 					]}
 					size={25}
 				>
-					{response.type}
+					{item.type}
 				</Badge>
 			</Card.Content>
 			<Card.Title
-				title={response.title}
+				title={item.title}
 				titleNumberOfLines={3}
 				titleVariant="titleMedium"
 			/>
 			<Card.Content>
-				{response.text && <Text>{response.text}</Text>}
-				<Text>{response.url}</Text>
+				{item.text && <Text>{item.text}</Text>}
+				<Text>{item.url}</Text>
 			</Card.Content>
 		</Card>
 	);
@@ -69,9 +44,9 @@ const FeedItem = ({ postID }) => {
 
 const styles = StyleSheet.create({
 	card: {
-		width: "100%",
 		marginVertical: 8,
 		paddingVertical: 8,
+		marginHorizontal: 8,
 	},
 	badge: {
 		paddingHorizontal: 16,
