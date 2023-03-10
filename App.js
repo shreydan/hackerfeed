@@ -29,7 +29,7 @@ function App() {
 				<Stack.Screen name="HackerFeed" component={Feed} />
 			</Stack.Navigator>
 
-			<StatusBar style="auto" />
+			<StatusBar style="dark" />
 		</NavigationContainer>
 	);
 }

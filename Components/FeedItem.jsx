@@ -13,7 +13,7 @@ const FeedItem = ({ item }) => {
 				<Badge
 					style={[
 						styles.badge,
-						{ backgroundColor: theme.colors.inverseSurface },
+						{ backgroundColor: theme.colors.primary },
 					]}
 					size={25}
 				>
@@ -22,7 +22,7 @@ const FeedItem = ({ item }) => {
 				<Badge
 					style={[
 						styles.badge,
-						{ backgroundColor: theme.colors.inversePrimary },
+						{ backgroundColor: theme.colors.secondary },
 					]}
 					size={25}
 				>
@@ -35,7 +35,7 @@ const FeedItem = ({ item }) => {
 					]}
 					size={25}
 				>
-					{`${item.kids.length} comments`}
+					{`${item.kids ? item.kids.length : 0} comments`}
 				</Badge>
 			</Card.Content>
 			<Card.Title
