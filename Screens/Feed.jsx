@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import React from "react";
 import FeedList from "../Components/FeedList";
-import FeedItem from "../Components/FeedItem";
 
 const Feed = () => {
 	const theme = useTheme();
