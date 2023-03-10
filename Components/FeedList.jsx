@@ -1,0 +1,79 @@
+import React, { useState, useEffect } from "react";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
+import { FlatList } from "react-native";
+import FeedItem from "./FeedItem";
+
+const getItemURL = (id) => {
+	return `https://hacker-news.firebaseio.com/v0/item/${id}.json`;
+};
+
+const FeedList = () => {
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+	const [response, setResponse] = useState([]);
+	const [limit, setLimit] = useState(10);
+
+	const theme = useTheme();
+
+	const FEED_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
+
+	async function getData() {
+		const ids = await (
+			await fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
+		).json();
+
+		const data = Promise.all(
+			ids
+				.slice(0, limit)
+				.map(
+					async (i) =>
+						await (
+							await fetch(
+								`https://hacker-news.firebaseio.com/v0/item/${i}.json`
+							)
+						).json()
+				)
+		);
+		return data;
+	}
+
+	useEffect(() => {
+		getData()
+			.then((data) => {
+				setIsLoading(false);
+				setIsError(false);
+				setResponse(data);
+				console.log(data);
+			})
+			.catch((error) => {
+				setIsError(true);
+				setIsLoading(false);
+			});
+	}, []);
+
+	if (isLoading) {
+		return <ActivityIndicator animating={isLoading} />;
+	}
+	if (isError) {
+		return (
+			<Text style={{ color: theme.colors.error }}>
+				an error has occurred unfortunately :(
+			</Text>
+		);
+	}
+
+	const renderItem = ({ item }) => {
+		return <FeedItem item={item} />;
+	};
+
+	return (
+		<FlatList
+			data={response}
+			renderItem={renderItem}
+			keyExtractor={(item) => item.id}
+			style={{ width: "100%" }}
+		/>
+	);
+};
+
+export default FeedList;
