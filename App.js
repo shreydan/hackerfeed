@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Provider as PaperProvider } from "react-native-paper";
+import { MD3LightTheme, adaptNavigationTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Feed from "./Screens/Feed";
+import Navbar from "./Components/Navbar";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const { LightTheme } = adaptNavigationTheme({
+  reactNavigationLight: DefaultTheme,
+});
+
+function App() {
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <NavigationContainer theme={LightTheme}>
+      <Stack.Navigator
+        initialRouteName="HackerFeed"
+        screenOptions={{
+          header: (props) => <Navbar {...props} title={props.route.name} />,
+        }}
+      >
+        <Stack.Screen name="HackerFeed" component={Feed} />
+      </Stack.Navigator>
+
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => (
+  <PaperProvider theme={MD3LightTheme}>
+    <App />
+  </PaperProvider>
+);
