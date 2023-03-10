@@ -13,7 +13,7 @@ const FeedItem = ({ item }) => {
 				<Badge
 					style={[
 						styles.badge,
-						{ backgroundColor: theme.colors.primary },
+						{ backgroundColor: theme.colors.inverseSurface },
 					]}
 					size={25}
 				>
@@ -28,6 +28,15 @@ const FeedItem = ({ item }) => {
 				>
 					{item.type}
 				</Badge>
+				<Badge
+					style={[
+						styles.badge,
+						{ backgroundColor: theme.colors.inversePrimary },
+					]}
+					size={25}
+				>
+					{`${item.kids.length} comments`}
+				</Badge>
 			</Card.Content>
 			<Card.Title
 				title={item.title}
@@ -35,8 +44,14 @@ const FeedItem = ({ item }) => {
 				titleVariant="titleMedium"
 			/>
 			<Card.Content>
-				{item.text && <Text>{item.text}</Text>}
-				<Text>{item.url}</Text>
+				{item.text && (
+					<Text>
+						{item.text
+							.replace(/<\/?[^>]+(>|$)/g, "")
+							.slice(0, 100)
+							.trim() + "..."}
+					</Text>
+				)}
 			</Card.Content>
 		</Card>
 	);
@@ -49,7 +64,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 8,
 	},
 	badge: {
-		paddingHorizontal: 16,
+		paddingHorizontal: 8,
 		marginRight: 8,
 	},
 });
