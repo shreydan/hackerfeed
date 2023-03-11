@@ -5,6 +5,7 @@ import { useTheme } from "react-native-paper";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Feed from "./Screens/Feed";
+import Post from "./Screens/Post";
 import Navbar from "./Components/Navbar";
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ function App() {
 				}}
 			>
 				<Stack.Screen name="HackerFeed" component={Feed} />
+				<Stack.Screen name="Post" component={Post} />
 			</Stack.Navigator>
 
 			<StatusBar style="auto" />
