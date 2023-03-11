@@ -48,16 +48,23 @@ const FeedItem = ({ navigation, item }) => {
 				titleNumberOfLines={3}
 				titleVariant="titleMedium"
 			/>
-			<Card.Content>
-				{item.text && (
+			{item.text && (
+				<Card.Content>
 					<Text>
 						{item.text
 							.replace(/<\/?[^>]+(>|$)/g, "")
+							.replaceAll("&#x2F;", "/")
 							.slice(0, 100)
 							.trim() + "..."}
 					</Text>
-				)}
-			</Card.Content>
+					<Text
+						style={{ color: theme.colors.primary }}
+						variant="titleSmall"
+					>
+						read more
+					</Text>
+				</Card.Content>
+			)}
 		</Card>
 	);
 };
