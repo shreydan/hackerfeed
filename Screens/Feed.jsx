@@ -3,12 +3,12 @@ import { useTheme } from "react-native-paper";
 import React from "react";
 import FeedList from "../Components/FeedList";
 
-const Feed = () => {
+const Feed = ({ navigation }) => {
 	const theme = useTheme();
 
 	return (
 		<SafeAreaView style={[styles.container]}>
-			<FeedList />
+			<FeedList navigation={navigation} />
 		</SafeAreaView>
 	);
 };
