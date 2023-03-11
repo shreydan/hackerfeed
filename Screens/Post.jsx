@@ -6,14 +6,7 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import React, { useEffect } from "react";
-import {
-	Text,
-	Surface,
-	Badge,
-	useTheme,
-	Button,
-	Divider,
-} from "react-native-paper";
+import { Text, Surface, Badge, useTheme, Button } from "react-native-paper";
 import { feedURL } from "../utils/urlparser";
 import RenderHTML from "react-native-render-html";
 
