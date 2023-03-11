@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Text, useTheme } from "react-native-paper";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import FeedItem from "./FeedItem";
 
 const getItemURL = (id) => {
 	return `https://hacker-news.firebaseio.com/v0/item/${id}.json`;
 };
 
-const FeedList = () => {
+const FeedList = ({ navigation }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	const [response, setResponse] = useState([]);
@@ -41,7 +41,6 @@ const FeedList = () => {
 				setIsLoading(false);
 				setIsError(false);
 				setResponse(data);
-				console.log(data);
 			})
 			.catch((error) => {
 				setIsError(true);
@@ -50,18 +49,43 @@ const FeedList = () => {
 	}, []);
 
 	if (isLoading) {
-		return <ActivityIndicator animating={isLoading} />;
+		return (
+			<View
+				style={{
+					flex: 1,
+					height: "100%",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<ActivityIndicator
+					animating={isLoading}
+					style={{
+						alignSelf: "center",
+					}}
+				/>
+			</View>
+		);
 	}
 	if (isError) {
 		return (
-			<Text style={{ color: theme.colors.error }}>
-				an error has occurred unfortunately :(
-			</Text>
+			<View
+				style={{
+					flex: 1,
+					height: "100%",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<Text style={{ color: theme.colors.error }}>
+					an error has occurred unfortunately :(
+				</Text>
+			</View>
 		);
 	}
 
 	const renderItem = ({ item }) => {
-		return <FeedItem item={item} />;
+		return <FeedItem item={item} navigation={navigation} />;
 	};
 
 	return (

@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTheme, Text, Card, Badge } from "react-native-paper";
 import { StyleSheet } from "react-native";
 
-const FeedItem = ({ item }) => {
+const FeedItem = ({ navigation, item }) => {
 	const theme = useTheme();
+
+	const navtoPost = () => {
+		navigation.navigate("Post", { item: item });
+	};
 
 	return (
 		<Card
+			onPress={navtoPost}
 			style={[styles.card, { backgroundColor: theme.colors.background }]}
 		>
 			<Card.Content style={{ flexDirection: "row", marginBottom: 8 }}>
