@@ -4,11 +4,13 @@ import {
 	StyleSheet,
 	View,
 	useWindowDimensions,
+	Linking,
 } from "react-native";
 import React, { useEffect } from "react";
 import { Text, Surface, Badge, useTheme, Button } from "react-native-paper";
 import { feedURL } from "../utils/urlparser";
 import RenderHTML from "react-native-render-html";
+import { Link } from "@react-navigation/native";
 
 const Post = ({ route }) => {
 	const theme = useTheme();
@@ -55,7 +57,7 @@ const Post = ({ route }) => {
 					{item.url && (
 						<Button
 							onPress={() => {
-								console.log("pressed");
+								Linking.openURL(item.url);
 							}}
 							style={[styles.url]}
 							mode="contained"

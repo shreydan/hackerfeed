@@ -11,7 +11,7 @@ const FeedList = ({ navigation }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	const [response, setResponse] = useState([]);
-	const [limit, setLimit] = useState(25);
+	const [limit, setLimit] = useState(30);
 
 	const theme = useTheme();
 
