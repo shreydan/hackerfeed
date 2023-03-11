@@ -2,6 +2,8 @@
 
 built using `react-native` via `expo` with 😮‍💨️ by `@shreydan`
 
+https://user-images.githubusercontent.com/21237364/224489191-94f3f577-1a48-482b-93ef-7717859e4228.mp4
+
 
 - it's super basic. 30 top posts on mobile, can open the linked website directly
 - no fetch-on-scroll thingy because I only read the front-page
